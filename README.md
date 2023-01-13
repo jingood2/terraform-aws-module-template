@@ -7,13 +7,9 @@ Terraform 모듈로도 사용되어야 하고 Terraform 모듈을 구성으로 �
 ### `HybridModule`
 
 CDKTF 구성을 작성하고 Terraform 모듈로 게시하려는 경우 `HybridModule` 템플릿을 사용할 수 있습니다.
-
-이 리포지토리를 Clone 하여 CDKTF로 Terraform 모듈을 개발하고 Publish 하기 위한 템플릿으로 사용할 수 있습니다.
-
-이러한 프로젝트는 `npx projen new --from projen-cdktf-hybrid-construct hybrid-module`을 사용하여 초기화할 수 있습니다.
+이 리포지토리를 Clone 하여 CDKTF로 Terraform 모듈을 개발하고 Publish 하기 위한 템플릿으로 사용할 수 있습니다. 이러한 프로젝트는 `npx projen new --from projen-cdktf-hybrid-construct hybrid-module`을 사용하여 초기화할 수 있습니다.
 
 projenrc.ts 파일의 구성 내용은 다음과 같습니다 
-
 
 ```js
 import {
@@ -46,6 +42,7 @@ const project = new HybridModule({
   // deps: [],                      /* Runtime dependencies of this module. */
   // description: undefined,        /* The description is just a string that helps people understand the purpose of the package. */
   // packageName: undefined,        /* The "name" in package.json. */
+
   // 아래 내용을 추가하면 Terraform Module Example 폴더가 생성됩니다.
   terraformExamples: {
     enabled: true,

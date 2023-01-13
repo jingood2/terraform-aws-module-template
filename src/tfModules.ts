@@ -1,6 +1,6 @@
 import { App } from "cdktf";
-import { Construct } from "constructs";
 import { TFModuleStack } from "cdktf-tf-module-stack";
+import { Construct } from "constructs";
 import { MyConstruct } from "./index";
 
 class MyAwesomeModule extends TFModuleStack {
