@@ -1,16 +1,19 @@
 # Projen-CDKTF-Hybrid-Construct
 
-Projen template for CDKTF Constructs that should also be used as Terraform Modules and for republishing Terraform Modules as Constructs.
+Terraform 모듈로도 사용되어야 하고 Terraform 모듈을 구성으로 다시 게시하기 위한 CDKTF 구성에 대한 Projen 템플릿입니다.
 
 ## Usage
 
 ### `HybridModule`
 
-If you want to write a CDKTF construct and also publish it as a Terraform Module you can use the `HybridModule` template.
+CDKTF 구성을 작성하고 Terraform 모듈로 게시하려는 경우 `HybridModule` 템플릿을 사용할 수 있습니다.
 
-You can initialize such a project using `npx projen new --from projen-cdktf-hybrid-construct hybrid-module`.
+이 리포지토리를 Clone 하여 CDKTF로 Terraform 모듈을 개발하고 Publish 하기 위한 템플릿으로 사용할 수 있습니다.
 
-A configutation might look like this:
+이러한 프로젝트는 `npx projen new --from projen-cdktf-hybrid-construct hybrid-module`을 사용하여 초기화할 수 있습니다.
+
+projenrc.ts 파일의 구성 내용은 다음과 같습니다 
+
 
 ```js
 import {
@@ -18,23 +21,24 @@ import {
   publishToRegistries,
 } from "projen-cdktf-hybrid-construct";
 const project = new HybridModule({
-  author: "jingood2",
-  authorAddress: "jingood2@gmail.com",
+  author: "jingood2",   // 변경 필요 
+  authorAddress: "jingood2@gmail.com",  // 변경 필요 
   defaultReleaseBranch: "main",
   devDeps: ["projen-cdktf-hybrid-construct"],
-  name: "terraform-aws-module-template",
+  name: "terraform-aws-module-template", // 변경 필요 
   repositoryUrl:
+    // 변경 필요 
     "https://github.com/jingood2/terraform-aws-module-template.git",
 
   // cdktfVersion: "^0.13.0",       /* Minimum target version of this library. */
   // constructExamples: undefined,  /* If set a construct examples folder will be created. */
   // ... all the other options
   ...publishToRegistries({
-    name: "my-new-hybrid-construct",
-    namespace: "jingood2",
+    name: "my-new-hybrid-construct", // 변경 필요
+    namespace: "jingood2",  // 변경 필요
     registries: ["npm"],
   }),
-  // If enabled a constructs example folder will be created
+  // 아래 내용을 추가하면 CDKTF Construct 예시 폴더가 생성됩니다.
   constructExamples: {
     enabled: true,
     folder: "examples/construct",
@@ -42,7 +46,7 @@ const project = new HybridModule({
   // deps: [],                      /* Runtime dependencies of this module. */
   // description: undefined,        /* The description is just a string that helps people understand the purpose of the package. */
   // packageName: undefined,        /* The "name" in package.json. */
-  // If enabled an example folder with terraform code will be created
+  // 아래 내용을 추가하면 Terraform Module Example 폴더가 생성됩니다.
   terraformExamples: {
     enabled: true,
     folder: "examples/terraform",
@@ -73,14 +77,14 @@ project.synth();
 
 ### Open Source
 
-We have a helper method for easy configuration, but there are still some manual steps required.
+손쉬운 구성을 위한 도우미 방법이 있지만 여전히 몇 가지 수동 단계가 필요합니다.
 
 #### Terraform
 
 1. [Sign in at the registry](https://registry.terraform.io/sign-in)
 2. [Select your repository](https://registry.terraform.io/github/create) and create the module
 
-Please make sure your repository name starts with `terraform-cdk-`.
+Module을 Terraform Registry에 추가하기 위해서는 리포지토리 이름이 `terraform-cdk-`로 시작해야 합니다 
 
 #### npm (Typescript)
 
@@ -89,7 +93,7 @@ Please make sure your repository name starts with `terraform-cdk-`.
 3. Create a [GitHub Action Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) with the name `NPM_TOKEN` and the value of the token
 
 ### Github Packages
-We have a helper method for easy configuration, no extra steps needed:
+Github에 Terraform Module 을 Publish 하는 경우, 쉬운 구성을 위한 도우미 방법이 있으며 추가 단계가 필요하지 않습니다.
 
 ```js
 const {
@@ -102,7 +106,7 @@ const project = new HybridModule({
   ...publishToGithubPackages({
     name: "my-new-hybrid-construct",
     namespace: "my-org",
-    registries: ["npm", "maven"], // pypi and nuget are not yet supported
+    registries: ["npm"],
   }),
 });
 ```
