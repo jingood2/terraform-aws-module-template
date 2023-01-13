@@ -1,0 +1,5 @@
+{
+  "language": "typescript",
+  "app": "npx ts-node --project ../tsconfig.dev.json index.ts",
+  "projectId": "hybrid-module-fb734dba-eac9-466c-96bb-7eb9c406c28a"
+}
